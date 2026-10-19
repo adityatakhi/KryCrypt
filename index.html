@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeyCrypt — Secure Password Generator · MGC Mukerian</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080c08'/><path d='M16 6a6 6 0 0 0-6 6v2H8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2h-2v-2a6 6 0 0 0-6-6zm-4 6a4 4 0 0 1 8 0v2h-8v-2zm4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4z' fill='%2300e676'/></svg>" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Top Nav -->
+    <nav class="topnav">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="30" height="30" rx="8" fill="#0f140f"/>
+          <rect width="30" height="30" rx="8" fill="url(#bgrad)" opacity="0.6"/>
+          <path d="M15 5a5 5 0 0 0-5 5v2H8a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 8 24h14a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 22 12h-2v-2a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v2h-6v-2zm3 5.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" fill="#00e676"/>
+          <defs>
+            <linearGradient id="bgrad" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00e676" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#00e676" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="brand-name">Key<span>Crypt</span></span>
+      </div>
+
+      <div class="nav-tabs">
+        <a class="nav-item active" href="#generator" data-tab="generator">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 3a4 4 0 0 0-4 4v1.5H5A1.5 1.5 0 0 0 3.5 10v6A1.5 1.5 0 0 0 5 17.5h10A1.5 1.5 0 0 0 16.5 16v-6A1.5 1.5 0 0 0 15 9h-1V7a4 4 0 0 0-4-4zm-2 4a2 2 0 0 1 4 0v1.5H8V7zm2 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" fill="currentColor"/></svg>
+          <span>Generator</span>
+        </a>
+        <a class="nav-item" href="#strength" data-tab="strength">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 14h2v3H3v-3zm4-4h2v7H7v-7zm4-4h2v11h-2V6zm4-3h2v14h-2V3z" fill="currentColor"/></svg>
+          <span>Strength Check</span>
+        </a>
+        <a class="nav-item" href="#tips" data-tab="tips">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 1 0 0 16A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-1 4h2v5H9v-5z" fill="currentColor"/></svg>
+          <span>Security Tips</span>
+        </a>
+        <a class="nav-item" href="#history" data-tab="history">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 3a7 7 0 1 0 .001 14.001A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10A5 5 0 0 1 10 5zm-.5 2v4l3 1.5-.5.87L9 11.5V7h.5z" fill="currentColor"/></svg>
+          <span>History</span>
+        </a>
+      </div>
+
+      <span class="nav-byline">Future Teach Institute, Bhangala &amp; MGC Mukerian</span>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+
+      <!-- ===== GENERATOR TAB ===== -->
+      <section class="tab-panel active" id="tab-generator">
+        <div class="panel-header">
+          <div class="panel-eyebrow">MGC Mukerian · Future Teach Institute</div>
+          <h1>Generate a secure password</h1>
+          <p class="panel-sub">Cryptographically secure &middot; 100% client-side &middot; Nothing leaves your browser</p>
+        </div>
+
+        <!-- Mode switcher -->
+        <div class="mode-switcher">
+          <button class="mode-btn active" data-mode="password" onclick="switchMode('password')">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 2a3 3 0 0 0-3 3v1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9V5a3 3 0 0 0-3-3zm0 1.5A1.5 1.5 0 0 1 9.5 5v1h-3V5A1.5 1.5 0 0 1 8 3.5zm0 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="currentColor"/></svg>
+            Password
+          </button>
+          <button class="mode-btn" data-mode="passphrase" onclick="switchMode('passphrase')">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M2 5h12M2 8h8M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Passphrase
+          </button>
+        </div>
+
+        <!-- Output box -->
+        <div class="pw-output-wrap">
+          <div class="pw-output-header">
+            <span class="pw-output-label">Generated output</span>
+            <span class="pw-output-dot"></span>
+          </div>
+          <div class="pw-output-body">
+            <div class="pw-output" id="pw-display"><span class="pw-placeholder">Click Generate to start</span></div>
+            <div class="pw-output-actions">
+              <button class="icon-btn" id="btn-copy" title="Copy to clipboard" onclick="copyPassword()">
+                <svg viewBox="0 0 20 20" fill="none"><rect x="7" y="7" width="10" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 13H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="1.5"/></svg>
+              </button>
+              <button class="icon-btn" id="btn-regen" title="Regenerate" onclick="generate()">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M3.5 10A6.5 6.5 0 0 1 10 3.5c2.1 0 3.97.99 5.18 2.52M16.5 10A6.5 6.5 0 0 1 10 16.5c-2.1 0-3.97-.99-5.18-2.52" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 2l1.5 4-4-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 18l-1.5-4 4 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strength meter -->
+        <div class="strength-row">
+          <div class="strength-meta">
+            <span class="strength-lbl">Strength</span>
+            <span class="strength-val" id="s-label">—</span>
+          </div>
+          <div class="strength-track" id="s-segments"></div>
+          <div class="stats-row">
+            <div class="stat-pill"><span class="stat-key">Entropy</span><span class="stat-val" id="s-entropy">—</span></div>
+            <div class="stat-pill"><span class="stat-key">Crack time</span><span class="stat-val" id="s-crack">—</span></div>
+            <div class="stat-pill"><span class="stat-key">Charset</span><span class="stat-val" id="s-charset">—</span></div>
+          </div>
+        </div>
+
+        <!-- PASSWORD OPTIONS -->
+        <div id="password-options">
+          <div class="section-label">Presets</div>
+          <div class="presets">
+            <button class="preset-btn" onclick="applyPreset('pin')">PIN</button>
+            <button class="preset-btn" onclick="applyPreset('wifi')">Wi-Fi</button>
+            <button class="preset-btn active" onclick="applyPreset('standard')">Standard</button>
+            <button class="preset-btn" onclick="applyPreset('strong')">Strong</button>
+            <button class="preset-btn" onclick="applyPreset('max')">Maximum</button>
+          </div>
+
+          <div class="section-label">Options</div>
+          <div class="options-grid">
+            <div class="opt-card opt-length">
+              <div class="opt-top"><span class="opt-label">Length</span><span class="opt-num" id="len-display">16</span></div>
+              <input type="range" min="4" max="64" value="16" step="1" id="len-slider" oninput="onLengthChange(this.value)" />
+              <div class="slider-marks"><span>4</span><span>16</span><span>32</span><span>48</span><span>64</span></div>
+            </div>
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Uppercase A–Z</span><button class="toggle on" id="t-upper" onclick="toggle('upper')"></button></div>
+              <span class="opt-preview">A B C … Z</span>
+            </div>
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Lowercase a–z</span><button class="toggle on" id="t-lower" onclick="toggle('lower')"></button></div>
+              <span class="opt-preview">a b c … z</span>
+            </div>
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Numbers 0–9</span><button class="toggle on" id="t-nums" onclick="toggle('nums')"></button></div>
+              <span class="opt-preview">0 1 2 … 9</span>
+            </div>
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Symbols</span><button class="toggle on" id="t-syms" onclick="toggle('syms')"></button></div>
+              <span class="opt-preview">! @ # $ % ^ &amp;</span>
+            </div>
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Exclude ambiguous</span><button class="toggle" id="t-noamb" onclick="toggle('noamb')"></button></div>
+              <span class="opt-preview">Remove 0 O l I 1</span>
+            </div>
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">No repeated chars</span><button class="toggle" id="t-norep" onclick="toggle('norep')"></button></div>
+              <span class="opt-preview">Every char appears once</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSPHRASE OPTIONS -->
+        <div id="passphrase-options" style="display:none">
+          <div class="pp-explainer">
+            <div class="pp-explainer-icon">💡</div>
+            <div>
+              <strong>What is a passphrase?</strong>
+              <p>A sequence of random words — easier to remember than random characters, and just as secure when long enough. Great for master passwords, Wi-Fi, or anywhere you type manually.</p>
+            </div>
+          </div>
+
+          <div class="section-label">Passphrase options</div>
+          <div class="options-grid pp-grid">
+            <div class="opt-card opt-length">
+              <div class="opt-top"><span class="opt-label">Word count</span><span class="opt-num" id="pp-word-display">4</span></div>
+              <input type="range" min="3" max="8" value="4" step="1" id="pp-word-slider" oninput="onWordCountChange(this.value)" />
+              <div class="slider-marks"><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+            </div>
+
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Separator</span></div>
+              <div class="sep-options">
+                <label class="sep-opt"><input type="radio" name="sep" value="hyphen" checked onchange="onSepChange(this.value)"><span>- Hyphen</span></label>
+                <label class="sep-opt"><input type="radio" name="sep" value="dot" onchange="onSepChange(this.value)"><span>. Dot</span></label>
+                <label class="sep-opt"><input type="radio" name="sep" value="under" onchange="onSepChange(this.value)"><span>_ Underscore</span></label>
+                <label class="sep-opt"><input type="radio" name="sep" value="space" onchange="onSepChange(this.value)"><span>⎵ Space</span></label>
+                <label class="sep-opt"><input type="radio" name="sep" value="random" onchange="onSepChange(this.value)"><span>? Random</span></label>
+                <label class="sep-opt"><input type="radio" name="sep" value="none" onchange="onSepChange(this.value)"><span>∅ None</span></label>
+              </div>
+            </div>
+
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Capitalize words</span>
+                <button class="toggle" id="t-ppcap" onclick="this.classList.toggle('on'); onCapChange(this.classList.contains('on'))"></button>
+              </div>
+              <span class="opt-preview">Apple-Brook-Cedar</span>
+            </div>
+
+            <div class="opt-card">
+              <div class="opt-top"><span class="opt-label">Append a number</span>
+                <button class="toggle on" id="t-ppnum" onclick="this.classList.toggle('on'); onNumChange(this.classList.contains('on'))"></button>
+              </div>
+              <span class="opt-preview">apple-brook-4271</span>
+            </div>
+          </div>
+
+          <div class="section-label">Style examples</div>
+          <div class="pp-examples">
+            <div class="pp-example" onclick="applyPPExample('hyphen', false, true, 4)">
+              <span class="pp-ex-label">Classic</span>
+              <span class="pp-ex-val">apple-brook-cedar-<span class="c-num">4271</span></span>
+            </div>
+            <div class="pp-example" onclick="applyPPExample('dot', true, false, 4)">
+              <span class="pp-ex-label">Title-dot</span>
+              <span class="pp-ex-val">Apple.Brook.Cedar.Drift</span>
+            </div>
+            <div class="pp-example" onclick="applyPPExample('under', false, true, 5)">
+              <span class="pp-ex-label">Long &amp; safe</span>
+              <span class="pp-ex-val">apple_brook_cedar_drift_ember_<span class="c-num">8312</span></span>
+            </div>
+            <div class="pp-example" onclick="applyPPExample('random', true, true, 4)">
+              <span class="pp-ex-label">Random sep</span>
+              <span class="pp-ex-val">Apple<span class="c-sep">~</span>Brook<span class="c-sep">!</span>Cedar<span class="c-sep">@</span><span class="c-num">5519</span></span>
+            </div>
+          </div>
+        </div>
+
+        <button class="generate-btn" onclick="generate()">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 3a4 4 0 0 0-4 4v1.5H5A1.5 1.5 0 0 0 3.5 10v6A1.5 1.5 0 0 0 5 17.5h10A1.5 1.5 0 0 0 16.5 16v-6A1.5 1.5 0 0 0 15 9h-1V7a4 4 0 0 0-4-4zm-2 4a2 2 0 0 1 4 0v1.5H8V7zm2 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" fill="currentColor"/></svg>
+          Generate
+        </button>
+      </section>
+
+      <!-- ===== STRENGTH CHECK TAB ===== -->
+      <section class="tab-panel" id="tab-strength">
+        <div class="panel-header">
+          <div class="panel-eyebrow">Analyser</div>
+          <h1>Check password strength</h1>
+          <p class="panel-sub">Analyse any password — nothing leaves your device</p>
+        </div>
+        <div class="check-wrap">
+          <div class="check-input-row">
+            <input type="password" id="check-input" class="check-input" placeholder="Paste or type a password…" oninput="analysePassword(this.value)" />
+            <button class="icon-btn" id="check-eye" onclick="toggleEye()" title="Show / hide">
+              <svg id="eye-icon" viewBox="0 0 20 20" fill="none"><path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+            </button>
+          </div>
+          <div class="strength-row" id="check-strength-row" style="opacity:0;transition:opacity .3s">
+            <div class="strength-meta">
+              <span class="strength-lbl">Strength</span>
+              <span class="strength-val" id="cs-label">—</span>
+            </div>
+            <div class="strength-track" id="cs-segments"></div>
+            <div class="stats-row">
+              <div class="stat-pill"><span class="stat-key">Entropy</span><span class="stat-val" id="cs-entropy">—</span></div>
+              <div class="stat-pill"><span class="stat-key">Crack time</span><span class="stat-val" id="cs-crack">—</span></div>
+              <div class="stat-pill"><span class="stat-key">Length</span><span class="stat-val" id="cs-len">—</span></div>
+            </div>
+          </div>
+          <div class="check-criteria" id="check-criteria"></div>
+        </div>
+      </section>
+
+      <!-- ===== TIPS TAB ===== -->
+      <section class="tab-panel" id="tab-tips">
+        <div class="panel-header">
+          <div class="panel-eyebrow">Best practices</div>
+          <h1>Security tips</h1>
+          <p class="panel-sub">Habits that actually protect you</p>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card tip-accent">
+            <div class="tip-icon">🔑</div>
+            <h3>Use a password manager</h3>
+            <p>You only need to remember one strong master password. The manager handles everything else — unique, complex passwords for every site.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🔢</div>
+            <h3>Longer beats complex</h3>
+            <p>A 20-character lowercase phrase is exponentially harder to crack than a 10-character mix of symbols and numbers. Length is your biggest lever.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">💬</div>
+            <h3>Try passphrases</h3>
+            <p>Four random words like "apple-brook-cedar-4271" are both memorable and strong — 60+ bits of entropy and easy to type on a phone or keyboard.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🧩</div>
+            <h3>Never reuse passwords</h3>
+            <p>When one site is breached, attackers try your credentials everywhere. Unique passwords mean a breach on one site can't cascade to others.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📲</div>
+            <h3>Enable 2FA everywhere</h3>
+            <p>Two-factor authentication stops most account takeover attacks even when your password is compromised. Use an authenticator app, not SMS.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🔄</div>
+            <h3>Change passwords after breaches</h3>
+            <p>Check haveibeenpwned.com regularly. Change any password for accounts that appear in known data breaches immediately.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🚫</div>
+            <h3>Avoid personal info</h3>
+            <p>Birthdates, pet names, and sports teams are the first things attackers guess — especially when your social media is public.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🧠</div>
+            <h3>Remember a passphrase, not a password</h3>
+            <p>Use a passphrase as your master password — it's the one you must remember. Pick 5+ unrelated words and commit them to memory.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HISTORY TAB ===== -->
+      <section class="tab-panel" id="tab-history">
+        <div class="panel-header">
+          <div class="panel-eyebrow">Session log</div>
+          <h1>Password history</h1>
+          <p class="panel-sub">Passwords generated this session — cleared when you close the tab</p>
+        </div>
+        <div id="history-list" class="history-list">
+          <div class="history-empty">No passwords generated yet. Head to the Generator tab to get started.</div>
+        </div>
+        <button class="clear-btn" onclick="clearHistory()">Clear history</button>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Copied to clipboard
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // ---- Segmented strength bar ----
+    const SEGMENT_COUNT = 10;
+
+    function buildSegments(containerId) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = '';
+      for (let i = 0; i < SEGMENT_COUNT; i++) {
+        const s = document.createElement('div');
+        s.className = 'strength-segment';
+        el.appendChild(s);
+      }
+    }
+
+    function updateSegments(containerId, pct, color) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      const lit = Math.round((pct / 100) * SEGMENT_COUNT);
+      [...el.children].forEach((seg, i) => {
+        if (i < lit) {
+          seg.classList.add('lit');
+          seg.style.background = color;
+          seg.style.color = color;
+        } else {
+          seg.classList.remove('lit');
+          seg.style.background = '';
+          seg.style.color = '';
+        }
+      });
+    }
+
+    // Override the strength bar update to use segments
+    const _origUpdateStrengthUI = updateStrengthUI;
+    window.updateStrengthUI = function(barId, labelId, entropyId, crackId, charsetId, bits, charsetText) {
+      const si = strengthInfo(bits);
+
+      // Map bar IDs to segment container IDs
+      const segMap = { 's-bar': 's-segments', 'cs-bar': 'cs-segments' };
+      const segId = segMap[barId] || barId;
+      updateSegments(segId, si.pct, si.color);
+
+      document.getElementById(labelId).textContent = si.label;
+      document.getElementById(labelId).style.color = si.color;
+      document.getElementById(entropyId).textContent = bits + ' bits';
+      document.getElementById(crackId).textContent = crackTime(bits);
+      document.getElementById(charsetId).textContent = charsetText;
+    };
+
+    // Build segments on load
+    buildSegments('s-segments');
+    buildSegments('cs-segments');
+
+    // Passphrase style examples helper
+    function applyPPExample(sep, cap, num, words) {
+      if (state.mode !== 'passphrase') switchMode('passphrase');
+      state.ppSep = sep;
+      state.ppCapitalize = cap;
+      state.ppIncludeNum = num;
+      state.ppWords = words;
+      document.getElementById('pp-word-slider').value = words;
+      document.getElementById('pp-word-display').textContent = words;
+      document.querySelector(`input[name="sep"][value="${sep}"]`).checked = true;
+      document.getElementById('t-ppcap').classList.toggle('on', cap);
+      document.getElementById('t-ppnum').classList.toggle('on', num);
+      generate();
+    }
+  </script>
+</body>
+</html>
